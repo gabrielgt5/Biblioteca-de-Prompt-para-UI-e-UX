@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biblioteca de Prompts · UI & UX</title>
+<!-- aplica tema e estado do menu antes da pintura, evitando flash -->
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("nav")==="collapsed")document.documentElement.classList.add("nav-collapsed");}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  /* ============ Tema claro (padrão) — contraste WCAG AA ============ */
+  :root{
+    --bg:#f2f4f8; --panel:#ffffff; --panel-2:#eceff4; --border:#c8cdd6;
+    --text:#141619;          /* 15.8:1 sobre --bg  */
+    --muted:#474c54;         /* 8.2:1  sobre --panel */
+    --accent:#0f62fe;        /* 4.6:1  sobre branco (link)  */
+    --accent-hover:#0043ce;
+    --accent-soft:#e3ecff;
+    --nav-active:#00379c;    /* 8.6:1  sobre --accent-soft  */
+    --code-bg:#161616; --code-text:#f4f4f4; --focus:#0043ce;
+    --grad:linear-gradient(103deg,#5b53f0 0%,#0f62fe 55%,#003bb3 100%);
+    --header-h:56px; --sidebar-w:288px; --measure:768px;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.07);
+    color-scheme:light;
+  }
+  /* ============ Tema escuro — contraste WCAG AA ============ */
+  :root[data-theme="dark"]{
+    --bg:#161616; --panel:#242424; --panel-2:#2e2e2e; --border:#4a4a4a;
+    --text:#f4f4f4;          /* 15:1  sobre --bg   */
+    --muted:#c2c7cf;         /* 8.6:1 sobre --panel */
+    --accent:#82abff;        /* 6.7:1 sobre --bg (link) */
+    --accent-hover:#a6c8ff;
+    --accent-soft:#1f2a45;
+    --nav-active:#bcd4ff;    /* 8.9:1 sobre --accent-soft */
+    --code-bg:#0b0c0e; --code-text:#f4f4f4; --focus:#82abff;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#161616; --panel:#242424; --panel-2:#2e2e2e; --border:#4a4a4a;
+      --text:#f4f4f4; --muted:#c2c7cf; --accent:#82abff; --accent-hover:#a6c8ff;
+      --accent-soft:#1f2a45; --nav-active:#bcd4ff; --code-bg:#0b0c0e; --code-text:#f4f4f4;
+      --focus:#82abff; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+      color-scheme:dark;
+    }
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  :focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:4px}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:40; height:var(--header-h);
+    display:flex; align-items:center; gap:12px; padding:0 20px;
+    background:var(--grad); color:#fff; box-shadow:0 1px 0 rgba(0,0,0,.12);
+  }
+  header .brand{display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; min-width:0}
+  header .brand .logo{
+    width:26px; height:26px; border-radius:7px; flex-shrink:0;
+    background:rgba(255,255,255,.2); display:grid; place-items:center; font-size:15px;
+  }
+  header .brand .txt{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  header .brand .sep{opacity:.6; font-weight:400}
+  header .spacer{flex:1}
+  header .icon-btn{
+    display:grid; place-items:center; width:36px; height:36px; flex-shrink:0;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+    color:#fff; border-radius:8px; cursor:pointer; font-size:15px; line-height:1;
+  }
+  header .icon-btn:hover{background:rgba(255,255,255,.28)}
+  header .icon-btn:focus-visible{outline-color:#fff}
+  header .ext{
+    color:#fff; text-decoration:none; font-size:13px; font-weight:500;
+    border:1px solid rgba(255,255,255,.45); padding:6px 13px; border-radius:20px; white-space:nowrap;
+  }
+  header .ext:hover{background:rgba(255,255,255,.16)}
+  header .ext:focus-visible{outline-color:#fff}
+
+  /* Botão ☰ visível em todas as larguras (recolhe a barra no desktop) */
+  .menu-btn{display:grid}
+  @media (min-width:861px){
+    html.nav-collapsed aside{display:none}
+  }
+
+  /* ---------- Shell ---------- */
+  .shell{display:flex; align-items:flex-start}
+  aside{
+    width:var(--sidebar-w); flex-shrink:0; background:var(--panel);
+    border-right:1px solid var(--border);
+    position:sticky; top:var(--header-h); height:calc(100vh - var(--header-h));
+    overflow-y:auto; padding:0 14px 40px;
+  }
+  /* Barra de busca */
+  .search-wrap{position:sticky; top:0; z-index:2; background:var(--panel); padding:14px 0 12px; margin-bottom:8px; border-bottom:1px solid var(--border)}
+  .search-ico{position:absolute; left:11px; top:calc(14px + 19px); transform:translateY(-50%); font-size:13px; opacity:.7; pointer-events:none}
+  #search{
+    width:100%; padding:9px 12px 9px 32px; border:1px solid var(--border); border-radius:8px;
+    background:var(--panel-2); color:var(--text); font:inherit; font-size:14px;
+  }
+  #search::placeholder{color:var(--muted)}
+  #search:focus{outline:2px solid var(--focus); outline-offset:1px; border-color:transparent}
+  /* Item + pino */
+  .nav-row{position:relative}
+  .nav-row a{padding-right:32px}
+  .pin{
+    position:absolute; right:6px; top:7px; width:24px; height:24px; padding:0;
+    display:grid; place-items:center; background:transparent; border:none; cursor:pointer;
+    color:var(--muted); font-size:15px; line-height:1; border-radius:6px;
+    opacity:.35; transition:opacity .12s,color .12s,background .12s;
+  }
+  .nav-row:hover .pin, .pin.on, .pin:focus-visible{opacity:1}
+  .pin.on{color:var(--accent)}
+  .pin:hover{color:var(--accent); background:var(--panel-2)}
+  .nav-empty{color:var(--muted); font-size:13px; padding:10px 12px; font-style:italic}
+  .nav-group{margin-bottom:20px}
+  .nav-group > .label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--muted); font-weight:600; margin:0 0 8px; padding:0 12px;
+  }
+  aside a{
+    display:block; text-decoration:none; color:var(--text); font-size:14px;
+    padding:9px 12px; border-radius:8px; margin-bottom:2px; line-height:1.3;
+    border-left:2px solid transparent; transition:background .12s,border-color .12s;
+  }
+  aside a .t{font-weight:500}
+  aside a small{display:block; color:var(--muted); font-size:11px; margin-top:3px; line-height:1.35}
+  aside a:hover{background:var(--panel-2)}
+  aside a.active{background:var(--accent-soft); border-left-color:var(--accent)}
+  aside a.active .t{color:var(--nav-active); font-weight:600}
+  aside a.active small{color:var(--nav-active)}
+
+  /* ---------- Conteúdo ---------- */
+  main{flex:1; min-width:0; display:flex; justify-content:center; padding:44px 40px 96px}
+  article{width:100%; max-width:var(--measure); line-height:1.7; font-size:16px; overflow-wrap:break-word; word-break:break-word}
+  article h1{font-size:clamp(26px,4vw,34px); font-weight:600; margin:.1em 0 .5em; line-height:1.2; letter-spacing:-.01em}
+  article h2{font-size:22px; font-weight:600; margin:1.7em 0 .7em; padding-bottom:.35em; border-bottom:1px solid var(--border)}
+  article h3{font-size:17px; font-weight:600; margin:1.5em 0 .5em}
+  article p,article li{color:var(--text)}
+  article strong{font-weight:600}
+  article a{color:var(--accent); text-decoration:none; border-bottom:1px solid transparent}
+  article a:hover{border-bottom-color:var(--accent)}
+  article blockquote{
+    margin:1.2em 0; padding:14px 18px; border:1px solid var(--border); border-left:3px solid var(--accent);
+    background:var(--panel); border-radius:0 10px 10px 0; color:var(--muted); box-shadow:var(--shadow);
+  }
+  article blockquote p{margin:.3em 0}
+  .table-wrap{overflow-x:auto; margin:1.3em 0; border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow)}
+  article table{border-collapse:collapse; width:100%; font-size:14px; min-width:min(560px,100%)}
+  article th,article td{padding:11px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border)}
+  article th{background:var(--panel-2); font-weight:600; white-space:nowrap}
+  article tr:last-child td{border-bottom:none}
+  article code{
+    background:var(--panel-2); padding:.15em .42em; border-radius:5px;
+    font-family:"IBM Plex Mono",Consolas,monospace; font-size:.86em; border:1px solid var(--border);
+  }
+  .code-wrap{position:relative; margin:1.3em 0}
+  article pre{
+    background:var(--code-bg); color:var(--code-text); border-radius:12px;
+    padding:18px 20px; overflow-x:auto; margin:0; box-shadow:var(--shadow);
+  }
+  article pre code{background:none; border:none; padding:0; color:inherit; font-size:13.5px; line-height:1.6; font-family:"IBM Plex Mono",Consolas,monospace}
+  .copy-btn{
+    position:absolute; top:10px; right:10px; font-size:11px; cursor:pointer; z-index:2;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#f4f4f4;
+    border-radius:6px; padding:5px 10px; opacity:0; transition:opacity .12s,background .12s;
+    font-family:"IBM Plex Sans",sans-serif;
+  }
+  .code-wrap:hover .copy-btn,.copy-btn:focus-visible{opacity:1}
+  .copy-btn:hover{background:rgba(255,255,255,.24)}
+  article hr{border:none; border-top:1px solid var(--border); margin:2.2em 0}
+  article img{max-width:100%; height:auto}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px}
+  .badge{font-size:12px; font-weight:500; padding:4px 11px; border-radius:20px; border:1px solid var(--border); line-height:1.5; white-space:nowrap}
+  .badge-task{background:var(--accent-soft); color:var(--nav-active); border-color:transparent; font-weight:600}
+  .badge-fw,.badge-tec{background:var(--panel-2); color:var(--text)}
+  .badge-nivel{background:transparent; color:var(--muted)}
+  #loading{color:var(--muted); font-style:italic}
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width:860px){
+    :root{--sidebar-w:270px}
+    header .ext{display:none}
+    aside{
+      position:fixed; top:var(--header-h); left:0; z-index:35;
+      transform:translateX(-100%); transition:transform .22s ease;
+      box-shadow:8px 0 30px rgba(0,0,0,.28); width:min(84vw,var(--sidebar-w));
+    }
+    aside.open{transform:translateX(0)}
+    .backdrop{display:none; position:fixed; inset:var(--header-h) 0 0 0; z-index:34; background:rgba(0,0,0,.45)}
+    .backdrop.show{display:block}
+    main{padding:28px 20px 80px}
+    article{font-size:15.5px}
+  }
+  @media (max-width:480px){
+    header{padding:0 12px; gap:8px}
+    main{padding:22px 16px 72px}
+    article pre{padding:14px 15px}
+  }
+</style>
+</head>
+<body>
+  <header>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <div class="brand">
+      <span class="logo">📚</span>
+      <span class="txt">Biblioteca de Prompts <span class="sep">·</span> UI &amp; UX</span>
+    </div>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="themeBtn" aria-label="Alternar tema claro/escuro" title="Alternar tema">🌙</button>
+    <a class="ext" href="https://github.com/gabrielgt5/Biblioteca-de-Prompt-para-UI-e-UX" target="_blank" rel="noopener">GitHub ↗</a>
+  </header>
+
+  <div class="shell">
+    <div class="backdrop" id="backdrop"></div>
+    <aside id="sidebar">
+      <div class="search-wrap">
+        <span class="search-ico" aria-hidden="true">🔍</span>
+        <input id="search" type="search" placeholder="Buscar…" aria-label="Buscar na biblioteca" autocomplete="off" />
+      </div>
+      <nav id="nav"></nav>
+    </aside>
+    <main>
+      <article id="content"><p id="loading">Carregando…</p></article>
+    </main>
+  </div>
+
+<script>
+  const NAV = [
+    { label: "Início", items: [
+      { file: "README.md", title: "Visão geral", desc: "Índice e guia de escolha" },
+    ]},
+    { label: "UX / UI e Design", items: [
+      { file: "frameworks/01-ux-ui/CARE.md",     title: "CARE",      desc: "Context · Ask · Rules · Examples" },
+      { file: "frameworks/01-ux-ui/RTCF.md",     title: "RTCF",      desc: "Role · Task · Context · Format" },
+      { file: "frameworks/01-ux-ui/C-C-E-R-A.md",title: "C-C-E-R-A", desc: "Clareza · Autocrítica técnica" },
+      { file: "frameworks/01-ux-ui/ICE.md",      title: "ICE",       desc: "Instruction · Context · Expectation" },
+    ]},
+    { label: "Frameworks · Corporativos", items: [
+      { file: "frameworks/02-gerais/COSTAR.md", title: "COSTAR", desc: "Context · Objective · Style · Tone · Audience · Response" },
+      { file: "frameworks/02-gerais/CRISPE.md", title: "CRISPE", desc: "Capacity · Insight · Statement…" },
+      { file: "frameworks/02-gerais/RACE.md",   title: "RACE",   desc: "Role · Action · Context · Expectation" },
+      { file: "frameworks/02-gerais/BAB.md",    title: "BAB",    desc: "Before · After · Bridge" },
+    ]},
+    { label: "⚙️ Técnicas de prompting", items: [
+      { file: "tecnicas/chain-of-thought.md",       title: "Chain-of-Thought",     desc: "Raciocínio passo a passo" },
+      { file: "tecnicas/decomposicao-step-zero.md", title: "Decomposição / Step Zero", desc: "Jornada antes das telas" },
+      { file: "tecnicas/few-shot.md",               title: "Few-Shot",             desc: "Aprendizado por exemplos" },
+      { file: "tecnicas/zero-shot.md",              title: "Zero-Shot",            desc: "Instrução direta, sem exemplos" },
+      { file: "tecnicas/prompting-iterativo.md",    title: "Prompting Iterativo",  desc: "Refino v1 → v2 → v3" },
+      { file: "tecnicas/autocritica.md",            title: "Autocrítica",          desc: "O modelo revisa a si mesmo" },
+    ]},
+    { label: "🍳 Receitas por tarefa", items: [
+      { file: "receitas/onboarding/arquitetura-fluxo-onboarding.md", title: "Fluxo de Onboarding",       desc: "Onboarding · CARE × CoT" },
+      { file: "receitas/design-system/documentacao-componente-ui.md", title: "Documentação de Componente", desc: "Design System · RTCF × Few-Shot" },
+      { file: "receitas/ux-writing/microcopy-erro-critico.md",       title: "Microcopy de Erro",         desc: "UX Writing · C-C-E-R-A × Iterativo" },
+    ]},
+  ];
+
+  const nav = document.getElementById("nav");
+  const content = document.getElementById("content");
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("backdrop");
+  const searchEl = document.getElementById("search");
+
+  const ALL = NAV.flatMap(g => g.items);
+  let currentFile = "";
+
+  // Pinos persistidos
+  let pins = new Set();
+  try{ const s = JSON.parse(localStorage.getItem("pins") || "[]"); if(Array.isArray(s)) pins = new Set(s); }catch(e){}
+  function savePins(){ try{ localStorage.setItem("pins", JSON.stringify([...pins])); }catch(e){} }
+  function togglePin(file){ pins.has(file) ? pins.delete(file) : pins.add(file); savePins(); renderNav(); }
+
+  function itemRow(it){
+    const row = document.createElement("div"); row.className = "nav-row";
+    const a = document.createElement("a");
+    a.href = "#" + it.file; a.dataset.file = it.file;
+    a.innerHTML = `<span class="t">${it.title}</span><small>${it.desc}</small>`;
+    if(it.file === currentFile) a.classList.add("active");
+    const on = pins.has(it.file);
+    const pin = document.createElement("button");
+    pin.type = "button"; pin.className = "pin" + (on ? " on" : "");
+    pin.textContent = on ? "★" : "☆";
+    pin.title = on ? "Desafixar" : "Fixar"; pin.setAttribute("aria-label", pin.title);
+    pin.onclick = (e) => { e.preventDefault(); e.stopPropagation(); togglePin(it.file); };
+    row.appendChild(a); row.appendChild(pin);
+    return row;
+  }
+  function groupEl(label, items){
+    const g = document.createElement("div"); g.className = "nav-group";
+    const p = document.createElement("p"); p.className = "label"; p.textContent = label;
+    g.appendChild(p);
+    items.forEach(it => g.appendChild(itemRow(it)));
+    return g;
+  }
+  function renderNav(){
+    const q = (searchEl.value || "").trim().toLowerCase();
+    const match = it => !q || (it.title + " " + it.desc).toLowerCase().includes(q);
+    nav.innerHTML = "";
+    const pinned = ALL.filter(it => pins.has(it.file) && match(it));
+    if(pinned.length) nav.appendChild(groupEl("📌 Fixados", pinned));
+    NAV.forEach(gr => {
+      const items = gr.items.filter(it => !pins.has(it.file) && match(it));
+      if(items.length) nav.appendChild(groupEl(gr.label, items));
+    });
+    if(!nav.children.length){
+      const e = document.createElement("p"); e.className = "nav-empty";
+      e.textContent = "Nada encontrado."; nav.appendChild(e);
+    }
+  }
+  searchEl.addEventListener("input", renderNav);
+  renderNav();
+
+  /* ----- Tema claro/escuro ----- */
+  const themeBtn = document.getElementById("themeBtn");
+  function systemDark(){ return matchMedia("(prefers-color-scheme:dark)").matches; }
+  function activeTheme(){ return document.documentElement.getAttribute("data-theme") || (systemDark() ? "dark" : "light"); }
+  function paintThemeIcon(){ themeBtn.textContent = activeTheme() === "dark" ? "☀️" : "🌙"; }
+  function setTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    try{ localStorage.setItem("theme", t); }catch(e){}
+    paintThemeIcon();
+  }
+  themeBtn.onclick = () => setTheme(activeTheme() === "dark" ? "light" : "dark");
+  matchMedia("(prefers-color-scheme:dark)").addEventListener("change", paintThemeIcon);
+  paintThemeIcon();
+
+  /* ----- Menu: off-canvas no mobile / recolhe no desktop ----- */
+  const menuBtn = document.getElementById("menuBtn");
+  const isMobile = () => matchMedia("(max-width:860px)").matches;
+  function closeMenu(){ sidebar.classList.remove("open"); backdrop.classList.remove("show"); }
+  menuBtn.onclick = () => {
+    if(isMobile()){
+      sidebar.classList.toggle("open"); backdrop.classList.toggle("show");
+    }else{
+      const collapsed = document.documentElement.classList.toggle("nav-collapsed");
+      try{ localStorage.setItem("nav", collapsed ? "collapsed" : "open"); }catch(e){}
+    }
+  };
+  backdrop.onclick = closeMenu;
+
+  /* ----- Frontmatter -> badges ----- */
+  function splitFrontmatter(text){
+    const m = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+    if(!m) return { meta:null, body:text };
+    const meta = {};
+    m[1].split("\n").forEach(line => {
+      const i = line.indexOf(":"); if(i < 0) return;
+      const key = line.slice(0,i).trim();
+      let val = line.slice(i+1).trim();
+      if(val.startsWith("[") && val.endsWith("]"))
+        val = val.slice(1,-1).split(",").map(s => s.trim()).filter(Boolean);
+      meta[key] = val;
+    });
+    return { meta, body:text.slice(m[0].length) };
+  }
+  function esc(s){ return String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+  function arr(v){ return Array.isArray(v) ? v : (v ? [v] : []); }
+  function renderBadges(meta){
+    if(!meta) return "";
+    const chips = [];
+    if(meta.tarefa) chips.push(`<span class="badge badge-task">${esc(meta.tarefa)}</span>`);
+    arr(meta.frameworks).forEach(f => chips.push(`<span class="badge badge-fw">🧱 ${esc(f)}</span>`));
+    arr(meta.tecnicas).forEach(t => chips.push(`<span class="badge badge-tec">⚙️ ${esc(t)}</span>`));
+    if(meta.nivel) chips.push(`<span class="badge badge-nivel">${esc(meta.nivel)}</span>`);
+    return chips.length ? `<div class="badges">${chips.join("")}</div>` : "";
+  }
+
+  /* ----- Roteamento / render ----- */
+  function resolvePath(base, rel){
+    if(/^https?:\/\//.test(rel)) return rel;
+    const stack = base.split("/"); stack.pop();
+    rel.split("/").forEach(p => {
+      if(p === "..") stack.pop();
+      else if(p !== "." && p !== "") stack.push(p);
+    });
+    return stack.join("/");
+  }
+
+  async function load(file){
+    file = file.replace(/^\.?\//, "");
+    content.innerHTML = '<p id="loading">Carregando…</p>';
+    try{
+      const res = await fetch(file, {cache:"no-cache"});
+      if(!res.ok) throw new Error(res.status);
+      const parsed = splitFrontmatter(await res.text());
+      content.innerHTML = renderBadges(parsed.meta) + marked.parse(parsed.body);
+      postProcess(file);
+    }catch(e){
+      content.innerHTML = `<h1>Ops…</h1><p>Não consegui carregar <code>${file}</code>.</p>
+        <p style="color:var(--muted)">Ao abrir direto do disco (<code>file://</code>) o navegador bloqueia a leitura dos arquivos.
+        Publique no GitHub Pages ou rode um servidor local:</p>
+        <div class="code-wrap"><pre><code>py -m http.server</code></pre></div>`;
+    }
+    currentFile = file;
+    document.querySelectorAll("aside a").forEach(a =>
+      a.classList.toggle("active", a.dataset.file === file));
+    window.scrollTo(0,0);
+  }
+
+  function postProcess(currentFile){
+    content.querySelectorAll("a[href]").forEach(a => {
+      const href = a.getAttribute("href");
+      if(href.startsWith("#") || /^https?:\/\//.test(href) || href.startsWith("mailto:")) return;
+      if(href.endsWith(".md")) a.setAttribute("href", "#" + resolvePath(currentFile, href));
+    });
+    content.querySelectorAll("table").forEach(t => {
+      const w = document.createElement("div"); w.className = "table-wrap";
+      t.parentNode.insertBefore(w, t); w.appendChild(t);
+    });
+    content.querySelectorAll("pre").forEach(pre => {
+      if(!pre.parentElement.classList.contains("code-wrap")){
+        const w = document.createElement("div"); w.className = "code-wrap";
+        pre.parentNode.insertBefore(w, pre); w.appendChild(pre);
+      }
+      addCopy(pre);
+    });
+    closeMenu();
+  }
+
+  function addCopy(pre){
+    if(pre.parentElement.querySelector(".copy-btn")) return;
+    const btn = document.createElement("button");
+    btn.className = "copy-btn"; btn.textContent = "Copiar";
+    btn.onclick = () => {
+      navigator.clipboard.writeText(pre.innerText);
+      btn.textContent = "Copiado!"; setTimeout(() => btn.textContent = "Copiar", 1400);
+    };
+    pre.parentElement.appendChild(btn);
+  }
+
+  function route(){ load(decodeURIComponent(location.hash.slice(1)) || "README.md"); }
+  window.addEventListener("hashchange", route);
+  route();
+</script>
+</body>
+</html>
