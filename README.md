@@ -59,6 +59,22 @@ Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de
 
 ---
 
+## Prompt para imagem e fotos
+
+Prompts para **gerar e editar imagens e fotos** com IA (Midjourney, DALL·E, Stable Diffusion, Gemini, Firefly).
+
+| Página | Conteúdo |
+|---|---|
+| [Visão geral](imagens-e-fotos/sobre.md) | O que é, ferramentas comuns e boas práticas |
+| [Anatomia do prompt](imagens-e-fotos/anatomia-do-prompt.md) | A fórmula (Sujeito + Composição + Iluminação + Textura + Equipamento) + exemplo montado |
+| [Dicionário: Iluminação](imagens-e-fotos/dicionario-iluminacao.md) | Chiaroscuro, Rembrandt, High-Key |
+| [Dicionário: Composição](imagens-e-fotos/dicionario-composicao.md) | Rule of Thirds, Knolling, Dutch Angle, Isometric 3D |
+| [Dicionário: Texturas](imagens-e-fotos/dicionario-texturas.md) | Impasto, 35mm Film Grain, Matte Ceramic, Brushed Metal |
+| [Dicionário: Estilos](imagens-e-fotos/dicionario-estilos.md) | Flat Design, Claymorphism, Glassmorphism, Editorial Noir |
+| [Catálogo por objetivo](imagens-e-fotos/catalogo-por-objetivo.md) | Escolha o estilo visual pela meta de negócio |
+
+---
+
 ## Guia de escolha rápida
 
 | Se você precisa... | Vá para |
@@ -101,10 +117,11 @@ A maioria dos frameworks combina os mesmos ingredientes em proporções diferent
 │   ├── 01-ux-ui/        CARE · RTCF · C-C-E-R-A · ICE
 │   └── 02-gerais/       COSTAR · CRISPE · RACE · BAB
 ├── tecnicas/            Chain-of-Thought · Few-Shot · Zero-Shot · Iterativo · Autocrítica · Step Zero
-└── receitas/
-    ├── onboarding/
-    ├── design-system/
-    └── ux-writing/
+├── receitas/
+│   ├── onboarding/
+│   ├── design-system/
+│   └── ux-writing/
+└── imagens-e-fotos/     Prompts para gerar e editar imagens e fotos
 ```
 
 ---
