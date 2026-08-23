@@ -78,4 +78,4 @@ o que estava acontecendo naquele momento?"
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [ICE](ICE.md) · [RTCF](RTCF.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [ICE](ICE.md) · [RTCF](RTCF.md)

@@ -41,4 +41,4 @@ No turno 3 do refino de microcopy de erro: *"Analise as mensagens contra acessib
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [C-C-E-R-A](../frameworks/01-ux-ui/C-C-E-R-A.md) · [Prompting iterativo](prompting-iterativo.md)
+[← Índice](../README.md) · Relacionadas: [C-C-E-R-A](../frameworks/01-ux-ui/C-C-E-R-A.md) · [Prompting iterativo](prompting-iterativo.md)

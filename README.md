@@ -1,10 +1,10 @@
-# 📚 Biblioteca de Prompts para UI e UX
+# Biblioteca de Prompts para UI e UX
 
 Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de produto, estruturada em **3 pilares**:
 
-1. **🧱 Frameworks** — o *esqueleto* que organiza a intenção do prompt.
-2. **⚙️ Técnicas** — o *motor de raciocínio* que faz o modelo pensar melhor.
-3. **🍳 Receitas** — a *entrega pronta*: framework × técnica aplicados a uma tarefa real.
+1. **Frameworks** — o *esqueleto* que organiza a intenção do prompt.
+2. **Técnicas** — o *motor de raciocínio* que faz o modelo pensar melhor.
+3. **Receitas** — a *entrega pronta*: framework × técnica aplicados a uma tarefa real.
 
 > **A fórmula:** `Receita = Framework(s) × Técnica(s) aplicados a uma Tarefa de UX` — sempre com o "por que funciona".
 
@@ -12,7 +12,7 @@ Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de
 
 ---
 
-## 🧱 Frameworks
+## Frameworks
 
 ### Focados em UX/UI e Design
 | Framework | Sigla | Melhor para |
@@ -32,7 +32,7 @@ Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de
 
 ---
 
-## ⚙️ Técnicas de prompting
+## Técnicas de prompting
 
 | Técnica | O que faz | Melhor para |
 |---|---|---|
@@ -45,19 +45,21 @@ Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de
 
 ---
 
-## 🍳 Receitas (prompts aplicados por tarefa)
+## Receitas (prompts aplicados por tarefa)
 
 | Receita | Combinação | Tarefa |
 |---|---|---|
 | [Arquitetura de fluxo de onboarding](receitas/onboarding/arquitetura-fluxo-onboarding.md) | CARE × Chain-of-Thought | Onboarding |
 | [Documentação de componente de UI](receitas/design-system/documentacao-componente-ui.md) | RTCF × Few-Shot | Design System |
 | [Microcopy de erro crítico](receitas/ux-writing/microcopy-erro-critico.md) | C-C-E-R-A × Iterativo | UX Writing |
+| [Mensagens de erro humanas (3 dimensões)](receitas/ux-writing/mensagens-erro-humanas.md) | RTCF × Few-Shot + Autocrítica | UX Writing |
+| [Reescrita direta de microcopy (plug-and-play)](receitas/ux-writing/reescrita-direta-microcopy.md) | RTCF × Zero-Shot | UX Writing |
 
 *Novas receitas por área (pesquisa, wireframe, acessibilidade, avaliação) serão adicionadas.*
 
 ---
 
-## 🎯 Guia de escolha rápida
+## Guia de escolha rápida
 
 | Se você precisa... | Vá para |
 |---|---|
@@ -75,7 +77,7 @@ Uma coletânea organizada para engenharia de prompt aplicada a UX/UI e design de
 
 ---
 
-## 🧩 Anatomia de um bom prompt
+## Anatomia de um bom prompt
 
 A maioria dos frameworks combina os mesmos ingredientes em proporções diferentes:
 
@@ -89,7 +91,7 @@ A maioria dos frameworks combina os mesmos ingredientes em proporções diferent
 
 ---
 
-## 📁 Estrutura do repositório
+## Estrutura do repositório
 
 ```
 .

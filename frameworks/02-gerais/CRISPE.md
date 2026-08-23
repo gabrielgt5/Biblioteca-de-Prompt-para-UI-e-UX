@@ -57,4 +57,4 @@ compare em fricção, segurança e esforço de implementação, e recomende uma.
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [RACE](RACE.md) · [COSTAR](COSTAR.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [RACE](RACE.md) · [COSTAR](COSTAR.md)

@@ -48,4 +48,4 @@ Documentar um componente "Alert Banner" fornecendo antes exemplos completos de "
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [Zero-Shot](zero-shot.md) · [Chain-of-Thought](chain-of-thought.md)
+[← Índice](../README.md) · Relacionadas: [Zero-Shot](zero-shot.md) · [Chain-of-Thought](chain-of-thought.md)

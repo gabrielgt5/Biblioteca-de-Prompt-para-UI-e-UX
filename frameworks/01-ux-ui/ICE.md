@@ -52,4 +52,4 @@ cada uma com título (máx. 4 palavras) + descrição (máx. 12 palavras) + rót
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [CARE](CARE.md) · [RACE](../02-gerais/RACE.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [CARE](CARE.md) · [RACE](../02-gerais/RACE.md)

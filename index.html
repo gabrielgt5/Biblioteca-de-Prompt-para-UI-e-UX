@@ -4,47 +4,51 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Biblioteca de Prompts · UI & UX</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<meta name="theme-color" content="#253529" />
 <!-- aplica tema e estado do menu antes da pintura, evitando flash -->
 <script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("nav")==="collapsed")document.documentElement.classList.add("nav-collapsed");}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
   /* ============ Tema claro (padrão) — contraste WCAG AA ============ */
   :root{
-    --bg:#f2f4f8; --panel:#ffffff; --panel-2:#eceff4; --border:#c8cdd6;
-    --text:#141619;          /* 15.8:1 sobre --bg  */
-    --muted:#474c54;         /* 8.2:1  sobre --panel */
-    --accent:#0f62fe;        /* 4.6:1  sobre branco (link)  */
-    --accent-hover:#0043ce;
-    --accent-soft:#e3ecff;
-    --nav-active:#00379c;    /* 8.6:1  sobre --accent-soft  */
-    --code-bg:#161616; --code-text:#f4f4f4; --focus:#0043ce;
-    --grad:linear-gradient(103deg,#5b53f0 0%,#0f62fe 55%,#003bb3 100%);
+    /* Neutros (cinza levemente esverdeado) para a base */
+    --bg:#F1F2EF; --panel:#FFFFFF; --panel-2:#ECEDEA; --border:#D9DBD4;
+    --text:#161A16;          /* 15.7:1 sobre --bg  */
+    --muted:#59605A;         /* 6.5:1  sobre --panel */
+    /* Verdes da paleta reservados para acentos */
+    --accent:#3A5A44;        /* 6.9:1  sobre --bg (link)  */
+    --accent-hover:#26402E;
+    --accent-soft:#E5EBE0;
+    --nav-active:#24402D;    /* 9.4:1  sobre --accent-soft  */
+    --code-bg:#1F251F; --code-text:#E9EAE6; --focus:#3A5A44;
+    --header-bg:#253529; --header-fg:#E9EAE6;
     --header-h:56px; --sidebar-w:288px; --measure:768px;
-    --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.07);
+    --shadow:0 1px 2px rgba(20,25,20,.06),0 8px 24px rgba(20,25,20,.07);
     color-scheme:light;
   }
   /* ============ Tema escuro — contraste WCAG AA ============ */
   :root[data-theme="dark"]{
-    --bg:#161616; --panel:#242424; --panel-2:#2e2e2e; --border:#4a4a4a;
-    --text:#f4f4f4;          /* 15:1  sobre --bg   */
-    --muted:#c2c7cf;         /* 8.6:1 sobre --panel */
-    --accent:#82abff;        /* 6.7:1 sobre --bg (link) */
-    --accent-hover:#a6c8ff;
-    --accent-soft:#1f2a45;
-    --nav-active:#bcd4ff;    /* 8.9:1 sobre --accent-soft */
-    --code-bg:#0b0c0e; --code-text:#f4f4f4; --focus:#82abff;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+    --bg:#181A18; --panel:#212420; --panel-2:#2A2D29; --border:#3B3F3A;
+    --text:#E9EAE6;          /* 14.5:1 sobre --bg   */
+    --muted:#A6ADA5;         /* 6.8:1  sobre --panel */
+    --accent:#BFD0B2;        /* 10.7:1 sobre --bg (link) */
+    --accent-hover:#D6E0CC;
+    --accent-soft:#262B22;
+    --nav-active:#BFD0B2;    /* 8.9:1  sobre --accent-soft */
+    --code-bg:#0F110E; --code-text:#E9EAE6; --focus:#8AA88A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5);
     color-scheme:dark;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#161616; --panel:#242424; --panel-2:#2e2e2e; --border:#4a4a4a;
-      --text:#f4f4f4; --muted:#c2c7cf; --accent:#82abff; --accent-hover:#a6c8ff;
-      --accent-soft:#1f2a45; --nav-active:#bcd4ff; --code-bg:#0b0c0e; --code-text:#f4f4f4;
-      --focus:#82abff; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+      --bg:#181A18; --panel:#212420; --panel-2:#2A2D29; --border:#3B3F3A;
+      --text:#E9EAE6; --muted:#A6ADA5; --accent:#BFD0B2; --accent-hover:#D6E0CC;
+      --accent-soft:#262B22; --nav-active:#BFD0B2; --code-bg:#0F110E; --code-text:#E9EAE6;
+      --focus:#8AA88A; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5);
       color-scheme:dark;
     }
   }
@@ -52,7 +56,7 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0; font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    margin:0; font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   :focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:4px}
@@ -61,31 +65,30 @@
   header{
     position:sticky; top:0; z-index:40; height:var(--header-h);
     display:flex; align-items:center; gap:12px; padding:0 20px;
-    background:var(--grad); color:#fff; box-shadow:0 1px 0 rgba(0,0,0,.12);
+    background:var(--header-bg); color:var(--header-fg); box-shadow:0 1px 0 rgba(0,0,0,.10);
   }
   header .brand{display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; min-width:0}
-  header .brand .logo{
-    width:26px; height:26px; border-radius:7px; flex-shrink:0;
-    background:rgba(255,255,255,.2); display:grid; place-items:center; font-size:15px;
-  }
+  header .brand .logo{display:flex; align-items:center; flex-shrink:0}
+  header .brand .logo img{height:30px; width:auto; display:block}
+  header .brand .divider{width:1px; height:20px; flex-shrink:0; background:rgba(255,255,255,.28)}
   header .brand .txt{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   header .brand .sep{opacity:.6; font-weight:400}
   header .spacer{flex:1}
   header .icon-btn{
     display:grid; place-items:center; width:36px; height:36px; flex-shrink:0;
-    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
-    color:#fff; border-radius:8px; cursor:pointer; font-size:15px; line-height:1;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.24);
+    color:var(--header-fg); border-radius:8px; cursor:pointer; font-size:15px; line-height:1;
   }
-  header .icon-btn:hover{background:rgba(255,255,255,.28)}
-  header .icon-btn:focus-visible{outline-color:#fff}
+  header .icon-btn:hover{background:rgba(255,255,255,.22)}
+  header .icon-btn:focus-visible{outline-color:var(--header-fg)}
   header .ext{
-    color:#fff; text-decoration:none; font-size:13px; font-weight:500;
-    border:1px solid rgba(255,255,255,.45); padding:6px 13px; border-radius:20px; white-space:nowrap;
+    color:var(--header-fg); text-decoration:none; font-size:13px; font-weight:500;
+    border:1px solid rgba(255,255,255,.35); padding:6px 13px; border-radius:20px; white-space:nowrap;
   }
-  header .ext:hover{background:rgba(255,255,255,.16)}
-  header .ext:focus-visible{outline-color:#fff}
+  header .ext:hover{background:rgba(255,255,255,.14)}
+  header .ext:focus-visible{outline-color:var(--header-fg)}
 
-  /* Botão ☰ visível em todas as larguras (recolhe a barra no desktop) */
+  /* Botão de menu visível em todas as larguras (recolhe a barra no desktop) */
   .menu-btn{display:grid}
   @media (min-width:861px){
     html.nav-collapsed aside{display:none}
@@ -110,12 +113,12 @@
   #search:focus{outline:2px solid var(--focus); outline-offset:1px; border-color:transparent}
   /* Item + pino */
   .nav-row{position:relative}
-  .nav-row a{padding-right:32px}
+  .nav-row a{padding-left:34px}
   .pin{
-    position:absolute; right:6px; top:7px; width:24px; height:24px; padding:0;
+    position:absolute; left:7px; top:50%; transform:translateY(-50%); width:24px; height:24px; padding:0; z-index:2;
     display:grid; place-items:center; background:transparent; border:none; cursor:pointer;
     color:var(--muted); font-size:15px; line-height:1; border-radius:6px;
-    opacity:.35; transition:opacity .12s,color .12s,background .12s;
+    opacity:0; transition:opacity .12s,color .12s,background .12s;
   }
   .nav-row:hover .pin, .pin.on, .pin:focus-visible{opacity:1}
   .pin.on{color:var(--accent)}
@@ -123,9 +126,17 @@
   .nav-empty{color:var(--muted); font-size:13px; padding:10px 12px; font-style:italic}
   .nav-group{margin-bottom:20px}
   .nav-group > .label{
-    font-size:11px; text-transform:uppercase; letter-spacing:.08em;
-    color:var(--muted); font-weight:600; margin:0 0 8px; padding:0 12px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%;
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em; text-align:left;
+    color:var(--muted); font-weight:600; margin:0 0 6px; padding:6px 12px;
+    background:transparent; border:none; cursor:pointer; font-family:inherit; border-radius:6px;
+    transition:background .12s,color .12s;
   }
+  .nav-group > .label:hover{background:var(--panel-2); color:var(--text)}
+  .nav-group > .label svg{width:12px; height:12px; flex-shrink:0; transition:transform .18s}
+  .nav-group.collapsed > .label{margin-bottom:0}
+  .nav-group.collapsed > .label svg{transform:rotate(-90deg)}
+  .nav-group.collapsed .nav-items{display:none}
   aside a{
     display:block; text-decoration:none; color:var(--text); font-size:14px;
     padding:9px 12px; border-radius:8px; margin-bottom:2px; line-height:1.3;
@@ -153,11 +164,12 @@
     background:var(--panel); border-radius:0 10px 10px 0; color:var(--muted); box-shadow:var(--shadow);
   }
   article blockquote p{margin:.3em 0}
-  .table-wrap{overflow-x:auto; margin:1.3em 0; border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow)}
+  .table-wrap{overflow-x:auto; margin:1.3em 0; border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); background:var(--panel)}
   article table{border-collapse:collapse; width:100%; font-size:14px; min-width:min(560px,100%)}
   article th,article td{padding:11px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border)}
-  article th{background:var(--panel-2); font-weight:600; white-space:nowrap}
-  article tr:last-child td{border-bottom:none}
+  article thead th{background:var(--panel-2); font-weight:600; white-space:nowrap; border-bottom:2px solid var(--border)}
+  article tbody tr:last-child td{border-bottom:none}
+  article tbody tr:hover td{background:var(--panel-2)}
   article code{
     background:var(--panel-2); padding:.15em .42em; border-radius:5px;
     font-family:"IBM Plex Mono",Consolas,monospace; font-size:.86em; border:1px solid var(--border);
@@ -172,7 +184,7 @@
     position:absolute; top:10px; right:10px; font-size:11px; cursor:pointer; z-index:2;
     background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#f4f4f4;
     border-radius:6px; padding:5px 10px; opacity:0; transition:opacity .12s,background .12s;
-    font-family:"IBM Plex Sans",sans-serif;
+    font-family:"Space Grotesk",sans-serif;
   }
   .code-wrap:hover .copy-btn,.copy-btn:focus-visible{opacity:1}
   .copy-btn:hover{background:rgba(255,255,255,.24)}
@@ -183,6 +195,12 @@
   .badge-task{background:var(--accent-soft); color:var(--nav-active); border-color:transparent; font-weight:600}
   .badge-fw,.badge-tec{background:var(--panel-2); color:var(--text)}
   .badge-nivel{background:transparent; color:var(--muted)}
+  .badge svg{width:11px; height:11px; margin-right:4px; vertical-align:-1px}
+  /* Ícones SVG */
+  .icon-btn svg{width:18px; height:18px}
+  .ext svg{width:12px; height:12px; margin-left:5px; vertical-align:-1px}
+  .search-ico svg{width:14px; height:14px; display:block}
+  .pin svg{width:14px; height:14px; display:block}
   #loading{color:var(--muted); font-style:italic}
 
   /* ---------- Responsivo ---------- */
@@ -209,21 +227,26 @@
 </head>
 <body>
   <header>
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></svg>
+    </button>
     <div class="brand">
-      <span class="logo">📚</span>
+      <span class="logo">
+        <img src="assets/logo-tema-escuro.png" alt="gabriel.des.br" />
+      </span>
+      <span class="divider" aria-hidden="true"></span>
       <span class="txt">Biblioteca de Prompts <span class="sep">·</span> UI &amp; UX</span>
     </div>
     <span class="spacer"></span>
-    <button class="icon-btn" id="themeBtn" aria-label="Alternar tema claro/escuro" title="Alternar tema">🌙</button>
-    <a class="ext" href="https://github.com/gabrielgt5/Biblioteca-de-Prompt-para-UI-e-UX" target="_blank" rel="noopener">GitHub ↗</a>
+    <button class="icon-btn" id="themeBtn" aria-label="Alternar tema claro/escuro" title="Alternar tema"></button>
+    <a class="ext" href="https://github.com/gabrielgt5/Biblioteca-de-Prompt-para-UI-e-UX" target="_blank" rel="noopener">GitHub<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h4v4M13 3 7.5 8.5M11 9.2v3.3A1.5 1.5 0 0 1 9.5 14h-6A1.5 1.5 0 0 1 2 12.5v-6A1.5 1.5 0 0 1 3.5 5H7"/></svg></a>
   </header>
 
   <div class="shell">
     <div class="backdrop" id="backdrop"></div>
     <aside id="sidebar">
       <div class="search-wrap">
-        <span class="search-ico" aria-hidden="true">🔍</span>
+        <span class="search-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.3"/><path d="m10.2 10.2 3.3 3.3"/></svg></span>
         <input id="search" type="search" placeholder="Buscar…" aria-label="Buscar na biblioteca" autocomplete="off" />
       </div>
       <nav id="nav"></nav>
@@ -236,34 +259,46 @@
 <script>
   const NAV = [
     { label: "Início", items: [
-      { file: "README.md", title: "Visão geral", desc: "Índice e guia de escolha" },
+      { file: "README.md", title: "Visão geral", info: "Índice geral e guia de escolha rápida da biblioteca." },
     ]},
-    { label: "UX / UI e Design", items: [
-      { file: "frameworks/01-ux-ui/CARE.md",     title: "CARE",      desc: "Context · Ask · Rules · Examples" },
-      { file: "frameworks/01-ux-ui/RTCF.md",     title: "RTCF",      desc: "Role · Task · Context · Format" },
-      { file: "frameworks/01-ux-ui/C-C-E-R-A.md",title: "C-C-E-R-A", desc: "Clareza · Autocrítica técnica" },
-      { file: "frameworks/01-ux-ui/ICE.md",      title: "ICE",       desc: "Instruction · Context · Expectation" },
+    { label: "Frameworks de UX/UI", items: [
+      { file: "frameworks/01-ux-ui/CARE.md",     title: "CARE",      info: "Planeje pesquisa e usabilidade. (Context · Ask · Rules · Examples)" },
+      { file: "frameworks/01-ux-ui/RTCF.md",     title: "RTCF",      info: "Especifique telas e componentes de alta fidelidade. (Role · Task · Context · Format)" },
+      { file: "frameworks/01-ux-ui/C-C-E-R-A.md",title: "C-C-E-R-A", info: "Gere UI de alta fidelidade com acessibilidade e autocrítica." },
+      { file: "frameworks/01-ux-ui/ICE.md",      title: "ICE",       info: "Monte instruções rápidas do dia a dia. (Instruction · Context · Expectation)" },
     ]},
-    { label: "Frameworks · Corporativos", items: [
-      { file: "frameworks/02-gerais/COSTAR.md", title: "COSTAR", desc: "Context · Objective · Style · Tone · Audience · Response" },
-      { file: "frameworks/02-gerais/CRISPE.md", title: "CRISPE", desc: "Capacity · Insight · Statement…" },
-      { file: "frameworks/02-gerais/RACE.md",   title: "RACE",   desc: "Role · Action · Context · Expectation" },
-      { file: "frameworks/02-gerais/BAB.md",    title: "BAB",    desc: "Before · After · Bridge" },
+    { label: "Frameworks gerais", items: [
+      { file: "frameworks/02-gerais/COSTAR.md", title: "COSTAR", info: "Conecte objetivos de negócio ao design. (Context · Objective · Style · Tone · Audience · Response)" },
+      { file: "frameworks/02-gerais/CRISPE.md", title: "CRISPE", info: "Compare soluções e alternativas técnicas. (Capacity · Insight · Statement · Personality · Experiment)" },
+      { file: "frameworks/02-gerais/RACE.md",   title: "RACE",   info: "Padronize entregas rápidas e repetitivas. (Role · Action · Context · Expectation)" },
+      { file: "frameworks/02-gerais/BAB.md",    title: "BAB",    info: "Escreva microcopy persuasivo. (Before · After · Bridge)" },
     ]},
-    { label: "⚙️ Técnicas de prompting", items: [
-      { file: "tecnicas/chain-of-thought.md",       title: "Chain-of-Thought",     desc: "Raciocínio passo a passo" },
-      { file: "tecnicas/decomposicao-step-zero.md", title: "Decomposição / Step Zero", desc: "Jornada antes das telas" },
-      { file: "tecnicas/few-shot.md",               title: "Few-Shot",             desc: "Aprendizado por exemplos" },
-      { file: "tecnicas/zero-shot.md",              title: "Zero-Shot",            desc: "Instrução direta, sem exemplos" },
-      { file: "tecnicas/prompting-iterativo.md",    title: "Prompting Iterativo",  desc: "Refino v1 → v2 → v3" },
-      { file: "tecnicas/autocritica.md",            title: "Autocrítica",          desc: "O modelo revisa a si mesmo" },
+    { label: "Técnicas de prompting", items: [
+      { file: "tecnicas/chain-of-thought.md",       title: "Chain-of-Thought",     info: "Faz o modelo raciocinar passo a passo antes de responder." },
+      { file: "tecnicas/decomposicao-step-zero.md", title: "Decomposição / Step Zero", info: "Resolve a jornada completa antes de detalhar as telas." },
+      { file: "tecnicas/few-shot.md",               title: "Few-Shot",             info: "Guia o modelo com exemplos de entrada e saída." },
+      { file: "tecnicas/zero-shot.md",              title: "Zero-Shot",            info: "Instrução direta, sem exemplos — para tarefas simples." },
+      { file: "tecnicas/prompting-iterativo.md",    title: "Prompting Iterativo",  info: "Refina a saída em camadas: v1 → v2 → v3." },
+      { file: "tecnicas/autocritica.md",            title: "Autocrítica",          info: "O modelo revisa a própria saída antes de entregar." },
     ]},
-    { label: "🍳 Receitas por tarefa", items: [
-      { file: "receitas/onboarding/arquitetura-fluxo-onboarding.md", title: "Fluxo de Onboarding",       desc: "Onboarding · CARE × CoT" },
-      { file: "receitas/design-system/documentacao-componente-ui.md", title: "Documentação de Componente", desc: "Design System · RTCF × Few-Shot" },
-      { file: "receitas/ux-writing/microcopy-erro-critico.md",       title: "Microcopy de Erro",         desc: "UX Writing · C-C-E-R-A × Iterativo" },
+    { label: "Receitas por tarefa", items: [
+      { file: "receitas/onboarding/arquitetura-fluxo-onboarding.md", title: "Fluxo de Onboarding",       info: "Estruture um fluxo de onboarding completo. (CARE × Chain-of-Thought)" },
+      { file: "receitas/design-system/documentacao-componente-ui.md", title: "Documentação de Componente", info: "Documente um componente do Design System. (RTCF × Few-Shot)" },
+      { file: "receitas/ux-writing/microcopy-erro-critico.md",       title: "Microcopy de Erro",         info: "Refine mensagens de erro em 3 turnos. (C-C-E-R-A × Iterativo)" },
+      { file: "receitas/ux-writing/mensagens-erro-humanas.md",       title: "Mensagens de Erro Humanas", info: "Escreva mensagens de erro humanas e acessíveis. (RTCF × Few-Shot)" },
+      { file: "receitas/ux-writing/reescrita-direta-microcopy.md",   title: "Reescrita Direta (Plug-and-Play)", info: "Otimize a copy de uma tela pronta, sem mexer no layout. (RTCF × Zero-Shot)" },
     ]},
   ];
+
+  const ICON = {
+    moon: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 9.4A5.5 5.5 0 1 1 6.6 2.6a4.5 4.5 0 0 0 6.8 6.8Z"/></svg>',
+    sun:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1"/></svg>',
+    layers: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2 2 5l6 3 6-3-6-3Z"/><path d="M2.2 8 8 11l5.8-3M2.2 11 8 14l5.8-3"/></svg>',
+    gear: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.1"/><path d="M8 1.6v1.5M8 12.9v1.5M1.6 8h1.5M12.9 8h1.5M3.5 3.5l1 1M11.5 11.5l1 1M12.5 3.5l-1 1M4.5 11.5l-1 1"/></svg>',
+    pinOff: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>',
+    pinOn: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>',
+    chevron: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>',
+  };
 
   const nav = document.getElementById("nav");
   const content = document.getElementById("content");
@@ -284,30 +319,48 @@
     const row = document.createElement("div"); row.className = "nav-row";
     const a = document.createElement("a");
     a.href = "#" + it.file; a.dataset.file = it.file;
-    a.innerHTML = `<span class="t">${it.title}</span><small>${it.desc}</small>`;
+    a.innerHTML = `<span class="t">${it.title}</span>`;
     if(it.file === currentFile) a.classList.add("active");
     const on = pins.has(it.file);
     const pin = document.createElement("button");
     pin.type = "button"; pin.className = "pin" + (on ? " on" : "");
-    pin.textContent = on ? "★" : "☆";
+    pin.innerHTML = on ? ICON.pinOn : ICON.pinOff;
     pin.title = on ? "Desafixar" : "Fixar"; pin.setAttribute("aria-label", pin.title);
     pin.onclick = (e) => { e.preventDefault(); e.stopPropagation(); togglePin(it.file); };
-    row.appendChild(a); row.appendChild(pin);
+    row.appendChild(pin); row.appendChild(a);
     return row;
+  }
+  // Grupos recolhíveis (persistidos)
+  let collapsedGroups = new Set();
+  try{ const s = JSON.parse(localStorage.getItem("collapsedGroups") || "[]"); if(Array.isArray(s)) collapsedGroups = new Set(s); }catch(e){}
+  const searching = () => (searchEl.value || "").trim().length > 0;
+  function toggleGroup(label, g, btn){
+    const nowCollapsed = g.classList.toggle("collapsed");
+    btn.setAttribute("aria-expanded", nowCollapsed ? "false" : "true");
+    nowCollapsed ? collapsedGroups.add(label) : collapsedGroups.delete(label);
+    try{ localStorage.setItem("collapsedGroups", JSON.stringify([...collapsedGroups])); }catch(e){}
   }
   function groupEl(label, items){
     const g = document.createElement("div"); g.className = "nav-group";
-    const p = document.createElement("p"); p.className = "label"; p.textContent = label;
-    g.appendChild(p);
-    items.forEach(it => g.appendChild(itemRow(it)));
+    const collapsed = collapsedGroups.has(label) && !searching();
+    if(collapsed) g.classList.add("collapsed");
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "label";
+    btn.innerHTML = `<span>${label}</span>${ICON.chevron}`;
+    btn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    btn.onclick = () => toggleGroup(label, g, btn);
+    g.appendChild(btn);
+    const box = document.createElement("div"); box.className = "nav-items";
+    items.forEach(it => box.appendChild(itemRow(it)));
+    g.appendChild(box);
     return g;
   }
   function renderNav(){
     const q = (searchEl.value || "").trim().toLowerCase();
-    const match = it => !q || (it.title + " " + it.desc).toLowerCase().includes(q);
+    const match = it => !q || (it.title + " " + (it.info || "")).toLowerCase().includes(q);
     nav.innerHTML = "";
     const pinned = ALL.filter(it => pins.has(it.file) && match(it));
-    if(pinned.length) nav.appendChild(groupEl("📌 Fixados", pinned));
+    if(pinned.length) nav.appendChild(groupEl("Fixados", pinned));
     NAV.forEach(gr => {
       const items = gr.items.filter(it => !pins.has(it.file) && match(it));
       if(items.length) nav.appendChild(groupEl(gr.label, items));
@@ -324,7 +377,7 @@
   const themeBtn = document.getElementById("themeBtn");
   function systemDark(){ return matchMedia("(prefers-color-scheme:dark)").matches; }
   function activeTheme(){ return document.documentElement.getAttribute("data-theme") || (systemDark() ? "dark" : "light"); }
-  function paintThemeIcon(){ themeBtn.textContent = activeTheme() === "dark" ? "☀️" : "🌙"; }
+  function paintThemeIcon(){ themeBtn.innerHTML = activeTheme() === "dark" ? ICON.sun : ICON.moon; }
   function setTheme(t){
     document.documentElement.setAttribute("data-theme", t);
     try{ localStorage.setItem("theme", t); }catch(e){}
@@ -369,8 +422,8 @@
     if(!meta) return "";
     const chips = [];
     if(meta.tarefa) chips.push(`<span class="badge badge-task">${esc(meta.tarefa)}</span>`);
-    arr(meta.frameworks).forEach(f => chips.push(`<span class="badge badge-fw">🧱 ${esc(f)}</span>`));
-    arr(meta.tecnicas).forEach(t => chips.push(`<span class="badge badge-tec">⚙️ ${esc(t)}</span>`));
+    arr(meta.frameworks).forEach(f => chips.push(`<span class="badge badge-fw">${ICON.layers}${esc(f)}</span>`));
+    arr(meta.tecnicas).forEach(t => chips.push(`<span class="badge badge-tec">${ICON.gear}${esc(t)}</span>`));
     if(meta.nivel) chips.push(`<span class="badge badge-nivel">${esc(meta.nivel)}</span>`);
     return chips.length ? `<div class="badges">${chips.join("")}</div>` : "";
   }

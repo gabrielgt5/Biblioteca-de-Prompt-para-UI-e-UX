@@ -58,4 +58,4 @@ Formato de saída: título (máx. 5 palavras) + descrição (máx. 15 palavras) 
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [ICE](../01-ux-ui/ICE.md) · [COSTAR](COSTAR.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [ICE](../01-ux-ui/ICE.md) · [COSTAR](COSTAR.md)

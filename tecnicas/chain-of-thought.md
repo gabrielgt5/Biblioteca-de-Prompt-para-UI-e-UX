@@ -46,4 +46,4 @@ Isso aparece completo na receita [Arquitetura de fluxo de onboarding](../receita
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [Decomposição / Step Zero](decomposicao-step-zero.md) · [Autocrítica](autocritica.md)
+[← Índice](../README.md) · Relacionadas: [Decomposição / Step Zero](decomposicao-step-zero.md) · [Autocrítica](autocritica.md)

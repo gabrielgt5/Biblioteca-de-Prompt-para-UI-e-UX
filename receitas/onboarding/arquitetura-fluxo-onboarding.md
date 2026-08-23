@@ -19,15 +19,15 @@ nivel: Avançado
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Evitar o vício de gerar telas isoladas sem conexão de fluxo. O prompt usa o **CARE** (Nielsen Norman Group) e força o modelo a **pensar passo a passo** na jornada completa do usuário **antes** de detalhar elementos visuais (aplicando a lógica do "Step Zero").
 
-## 🧩 Framework + Técnica
+## Framework + Técnica
 
 O **CARE** ancora a tarefa em contexto real (produto, usuário, meta de negócio). O **Chain-of-Thought** obriga a resolver a lógica da jornada antes do layout — a combinação garante que cada tela tenha um papel dentro do todo, e não seja um retângulo bonito e desconexo.
 
-## 📋 O Prompt
+## O Prompt
 
 ```text
 # CONTEXTO (CARE - Context)
@@ -57,28 +57,28 @@ Apresente a saída final no seguinte formato estruturado:
   * **Estratégia de Redução de Fricção:** (por que essa tela é estruturada assim?)
 ```
 
-## ▶️ Como usar
+## Como usar
 
 1. Troque o **contexto** (produto, público, meta de negócio) pelo seu caso real.
 2. Ajuste o **número de telas** conforme o fluxo (3–4 costuma ser o ideal para onboarding).
 3. Revise as **regras** — as regras negativas ("NUNCA…") são o que mais direciona a qualidade.
 4. Mantenha o **formato de saída** para receber a análise separada da especificação.
 
-## 💡 Por que funciona
+## Por que funciona
 
 Divide uma tarefa de alta complexidade em partes ordenadas (**decomposição**), reduz drasticamente o risco de layouts caóticos, garante conformidade com uma meta real de negócio (**conversão no KYC**) e respeita acessibilidade e usabilidade **desde o primeiro turno**.
 
-## 🔁 Variações
+## Variações
 
 - **Mais rigor técnico:** troque o CARE por [C-C-E-R-A](../../frameworks/01-ux-ui/C-C-E-R-A.md) para adicionar um passo de [autocrítica](../../tecnicas/autocritica.md) de acessibilidade ao final.
 - **Handoff para dev:** peça o formato de saída em specs de [RTCF](../../frameworks/01-ux-ui/RTCF.md) (código/Auto Layout).
 - **Outros fluxos:** funciona para checkout, cadastro, upgrade de plano — troque a meta de negócio.
 
-## 🔗 Relacionados
+## Relacionados
 
 - Framework: [CARE](../../frameworks/01-ux-ui/CARE.md)
 - Técnicas: [Chain-of-Thought](../../tecnicas/chain-of-thought.md) · [Decomposição / Step Zero](../../tecnicas/decomposicao-step-zero.md)
 
 ---
 
-📚 [← Índice](../../README.md)
+[← Índice](../../README.md)

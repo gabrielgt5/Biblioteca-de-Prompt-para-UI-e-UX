@@ -45,4 +45,4 @@ No onboarding financeiro: o modelo primeiro mapeia `Boas-vindas → Verificaçã
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [Chain-of-Thought](chain-of-thought.md) · [CARE](../frameworks/01-ux-ui/CARE.md)
+[← Índice](../README.md) · Relacionadas: [Chain-of-Thought](chain-of-thought.md) · [CARE](../frameworks/01-ux-ui/CARE.md)

@@ -45,4 +45,4 @@ Microcopy de erro de pagamento construído em 3 turnos: v1 gera 3 variações em
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [Autocrítica](autocritica.md) · [Chain-of-Thought](chain-of-thought.md)
+[← Índice](../README.md) · Relacionadas: [Autocrítica](autocritica.md) · [Chain-of-Thought](chain-of-thought.md)

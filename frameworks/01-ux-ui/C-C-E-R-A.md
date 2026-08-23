@@ -88,4 +88,4 @@ AUTOCRÍTICA (antes da resposta final):
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [RTCF](RTCF.md) · [CARE](CARE.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [RTCF](RTCF.md) · [CARE](CARE.md)

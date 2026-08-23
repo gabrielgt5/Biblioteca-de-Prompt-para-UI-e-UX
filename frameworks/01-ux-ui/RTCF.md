@@ -66,4 +66,4 @@ FORMAT: Markdown com (1) tabela de anatomia, (2) tabela de estados x comportamen
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [C-C-E-R-A](C-C-E-R-A.md) · [CARE](CARE.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [C-C-E-R-A](C-C-E-R-A.md) · [CARE](CARE.md)

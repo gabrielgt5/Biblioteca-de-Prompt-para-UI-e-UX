@@ -82,4 +82,4 @@ Terminar com uma recomendação clara e o custo estimado da fase 2.
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [BAB](BAB.md) · [RACE](RACE.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [BAB](BAB.md) · [RACE](RACE.md)

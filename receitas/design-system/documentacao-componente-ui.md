@@ -19,15 +19,15 @@ nivel: Intermediário
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Garantir **consistência absoluta** ao alimentar um Design System. Combina o **RTCF** (Role, Task, Context, Format) com **Few-Shot** (exemplos estruturados de entrada→saída) para alinhar a IA às especificações exatas de código e acessibilidade da empresa.
 
-## 🧩 Framework + Técnica
+## Framework + Técnica
 
 O **RTCF** define o papel (engenheiro de Design System), a tarefa e o formato. O **Few-Shot** faz o trabalho pesado: ao ver 2 componentes já documentados no padrão da casa, o modelo **replica a terminologia e a estrutura** em vez de inventar as suas.
 
-## 📋 O Prompt
+## O Prompt
 
 ```text
 #### ROLE (Papel)
@@ -63,28 +63,28 @@ Utilize exatamente a estrutura demonstrada nos exemplos abaixo. Forneça o mapea
 - **Acessibilidade (incluindo comportamento de leitores de tela/aria-live e foco):** ...
 ```
 
-## ▶️ Como usar
+## Como usar
 
 1. Substitua os **dois exemplos** por componentes reais já documentados no seu Design System (quanto mais fiéis, melhor).
 2. Troque o **componente-alvo** ("Alert Banner") pelo que você quer documentar.
 3. Ajuste o **CONTEXT** para sua stack (React/Tailwind, Vue, tokens próprios etc.).
 4. Reaproveite o mesmo prompt para documentar toda a biblioteca — a saída sai padronizada.
 
-## 💡 Por que funciona
+## Por que funciona
 
 O aprendizado no contexto (*in-context learning*) via **Few-Shot** é a técnica mais eficaz para forçar a IA a copiar uma **sintaxe técnica complexa** e seguir a **terminologia própria da empresa**, eliminando desvios estéticos e alucinações de código.
 
-## 🔁 Variações
+## Variações
 
 - **Saída em código:** peça no FORMAT o componente em React + Tailwind, não só a spec.
 - **Auditoria:** inverta — dê o componente pronto e peça para verificar aderência ao padrão dos exemplos.
 - **Rigor de acessibilidade:** adicione um passo de [autocrítica](../../tecnicas/autocritica.md) checando WCAG 2.2 AA.
 
-## 🔗 Relacionados
+## Relacionados
 
 - Framework: [RTCF](../../frameworks/01-ux-ui/RTCF.md)
 - Técnica: [Few-Shot](../../tecnicas/few-shot.md)
 
 ---
 
-📚 [← Índice](../../README.md)
+[← Índice](../../README.md)

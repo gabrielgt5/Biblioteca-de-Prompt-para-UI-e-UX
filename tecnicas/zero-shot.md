@@ -41,4 +41,4 @@ cada uma com no máximo 4 palavras."
 
 ---
 
-📚 [← Índice](../README.md) · Relacionadas: [Few-Shot](few-shot.md) · [Prompting iterativo](prompting-iterativo.md)
+[← Índice](../README.md) · Relacionadas: [Few-Shot](few-shot.md) · [Prompting iterativo](prompting-iterativo.md)

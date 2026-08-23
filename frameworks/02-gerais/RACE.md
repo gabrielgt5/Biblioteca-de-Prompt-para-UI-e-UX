@@ -54,4 +54,4 @@ incluindo casos felizes, de borda e de erro.
 
 ---
 
-📚 [← Voltar ao índice](../../README.md) · Relacionados: [ICE](../01-ux-ui/ICE.md) · [CRISPE](CRISPE.md)
+[← Voltar ao índice](../../README.md) · Relacionados: [ICE](../01-ux-ui/ICE.md) · [CRISPE](CRISPE.md)
