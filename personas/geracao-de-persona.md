@@ -36,6 +36,14 @@ Para cada persona, especifique com precisão:
 - Falta de espaço negativo: usuários reais REJEITAM coisas. Inclua o que a persona NÃO quer, resiste ou ignora.
 - Viés visual/estereótipo: não reforce clichês baseados em cargo, gênero ou setor.
 
+[ANTI-PERSONA — quem NÃO é o alvo]
+Descreva explicitamente 1 perfil para quem este produto NÃO é feito (má-adequação). Especifique:
+- Cargo/contexto do perfil de má-adequação (concreto, não "usuário aleatório").
+- Por que ele NÃO deve ser priorizado (usaria o produto de forma errada, expectativa incompatível, custo de suporte alto, volume irrelevante).
+- Qual pedido/recurso típico dele deve ser RECUSADO para não distorcer o design da persona-alvo.
+Regra: toda decisão que agrada a anti-persona e prejudica a persona-alvo deve ser evitada. Isso contém scope creep.
+(Não confunda com o espaço negativo de rejeição acima — aquele é o que a persona-ALVO rejeita; a anti-persona é OUTRA pessoa que não deve ser atendida.)
+
 [FLOW MODE]
 Trate a persona como um token semântico contínuo: densidade de informação, acessibilidade e
 modalidade de interação devem PERSISTIR e ser coerentes em toda a jornada. Gere um "filme"
@@ -58,6 +66,11 @@ Responda em JSON, mapeando a persona em restrições de layout:
     { "descricao": "", "gargalo_mensuravel": "" }
   ],
   "rejeicoes": [""],
+  "anti_persona": {
+    "perfil": "",
+    "por_que_nao_priorizar": "",
+    "pedidos_a_recusar": [""]
+  },
   "restricoes_de_layout": [""]
 }
 ```
@@ -73,6 +86,7 @@ Responda em JSON, mapeando a persona em restrições de layout:
 
 - **Ancoragem em dados** (`[INPUT_DADOS]`) impede o "usuário médio" inventado.
 - As **regras negativas** (anti-alucinação) forçam assimetria, fricção e ausência de estereótipo — os três sinais de persona real.
+- A **anti-persona** delimita quem NÃO atender — o que contém scope creep e protege as decisões de design da persona-alvo.
 - O **Flow Mode** garante coerência ao longo da jornada, não personas que se contradizem entre telas.
 - A **saída em JSON de restrições** transforma a persona em insumo de design, não num texto decorativo.
 
