@@ -75,6 +75,19 @@ Prompts para **gerar e editar imagens e fotos** com IA (Midjourney, DALL·E, Sta
 
 ---
 
+## Personas
+
+Prompts para **gerar e validar personas de UX** fundamentadas em dados reais (cargo, senioridade, momento da empresa, hub de ferramentas, contexto).
+
+| Página | Conteúdo |
+|---|---|
+| [Visão geral](personas/sobre.md) | Dados concretos, Flow Mode e cuidado com IA |
+| [Geração de persona](personas/geracao-de-persona.md) | Prompt principal: dados + anti-alucinação + Flow Mode + saída JSON |
+| [Auditoria de persona](personas/auditoria-de-persona.md) | Bandeiras vermelhas e teste de estresse |
+| [Mapa de Jornada do Usuário](personas/jornada-do-usuario.md) | Jornada detalhada em tabela, com regras de controle (SaaS ou era da IA) |
+
+---
+
 ## Guia de escolha rápida
 
 | Se você precisa... | Vá para |
@@ -121,7 +134,8 @@ A maioria dos frameworks combina os mesmos ingredientes em proporções diferent
 │   ├── onboarding/
 │   ├── design-system/
 │   └── ux-writing/
-└── imagens-e-fotos/     Prompts para gerar e editar imagens e fotos
+├── imagens-e-fotos/     Prompts para gerar e editar imagens e fotos
+└── personas/            Prompts para gerar e validar personas de UX
 ```
 
 ---

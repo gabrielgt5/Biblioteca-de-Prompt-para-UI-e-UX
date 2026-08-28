@@ -126,16 +126,20 @@
   .nav-empty{color:var(--muted); font-size:13px; padding:10px 12px; font-style:italic}
   .nav-group{margin-bottom:20px}
   .nav-group > .label{
-    display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%;
+    display:flex; align-items:center; gap:8px; width:100%;
     font-size:11px; text-transform:uppercase; letter-spacing:.08em; text-align:left;
-    color:var(--muted); font-weight:600; margin:0 0 6px; padding:6px 12px;
+    color:var(--muted); font-weight:600; margin:0 0 6px; padding:6px 10px;
     background:transparent; border:none; cursor:pointer; font-family:inherit; border-radius:6px;
     transition:background .12s,color .12s;
   }
   .nav-group > .label:hover{background:var(--panel-2); color:var(--text)}
-  .nav-group > .label svg{width:12px; height:12px; flex-shrink:0; transition:transform .18s}
+  .nav-group > .label .g-ico{display:flex; flex-shrink:0}
+  .nav-group > .label .g-ico svg{width:14px; height:14px; display:block}
+  .nav-group > .label .g-label{flex:1; min-width:0}
+  .nav-group > .label .chev{display:flex; flex-shrink:0; margin-left:auto}
+  .nav-group > .label .chev svg{width:12px; height:12px; display:block; transition:transform .18s}
   .nav-group.collapsed > .label{margin-bottom:0}
-  .nav-group.collapsed > .label svg{transform:rotate(-90deg)}
+  .nav-group.collapsed > .label .chev svg{transform:rotate(-90deg)}
   .nav-group.collapsed .nav-items{display:none}
   aside a{
     display:block; text-decoration:none; color:var(--text); font-size:14px;
@@ -258,22 +262,22 @@
 
 <script>
   const NAV = [
-    { label: "Início", items: [
+    { label: "Início", icon: "home", items: [
       { file: "README.md", title: "Visão geral", info: "Índice geral e guia de escolha rápida da biblioteca." },
     ]},
-    { label: "Frameworks de UX/UI", items: [
+    { label: "Frameworks UX", icon: "layers", items: [
       { file: "frameworks/01-ux-ui/CARE.md",     title: "CARE",      info: "Planeje pesquisa e usabilidade. (Context · Ask · Rules · Examples)" },
       { file: "frameworks/01-ux-ui/RTCF.md",     title: "RTCF",      info: "Especifique telas e componentes de alta fidelidade. (Role · Task · Context · Format)" },
       { file: "frameworks/01-ux-ui/C-C-E-R-A.md",title: "C-C-E-R-A", info: "Gere UI de alta fidelidade com acessibilidade e autocrítica." },
       { file: "frameworks/01-ux-ui/ICE.md",      title: "ICE",       info: "Monte instruções rápidas do dia a dia. (Instruction · Context · Expectation)" },
     ]},
-    { label: "Frameworks gerais", items: [
+    { label: "Frameworks gerais", icon: "grid", items: [
       { file: "frameworks/02-gerais/COSTAR.md", title: "COSTAR", info: "Conecte objetivos de negócio ao design. (Context · Objective · Style · Tone · Audience · Response)" },
       { file: "frameworks/02-gerais/CRISPE.md", title: "CRISPE", info: "Compare soluções e alternativas técnicas. (Capacity · Insight · Statement · Personality · Experiment)" },
       { file: "frameworks/02-gerais/RACE.md",   title: "RACE",   info: "Padronize entregas rápidas e repetitivas. (Role · Action · Context · Expectation)" },
       { file: "frameworks/02-gerais/BAB.md",    title: "BAB",    info: "Escreva microcopy persuasivo. (Before · After · Bridge)" },
     ]},
-    { label: "Técnicas de prompting", items: [
+    { label: "Técnicas", icon: "gear", items: [
       { file: "tecnicas/chain-of-thought.md",       title: "Chain-of-Thought",     info: "Faz o modelo raciocinar passo a passo antes de responder." },
       { file: "tecnicas/decomposicao-step-zero.md", title: "Decomposição / Step Zero", info: "Resolve a jornada completa antes de detalhar as telas." },
       { file: "tecnicas/few-shot.md",               title: "Few-Shot",             info: "Guia o modelo com exemplos de entrada e saída." },
@@ -281,14 +285,14 @@
       { file: "tecnicas/prompting-iterativo.md",    title: "Prompting Iterativo",  info: "Refina a saída em camadas: v1 → v2 → v3." },
       { file: "tecnicas/autocritica.md",            title: "Autocrítica",          info: "O modelo revisa a própria saída antes de entregar." },
     ]},
-    { label: "Receitas por tarefa", items: [
+    { label: "Receitas", icon: "beaker", items: [
       { file: "receitas/onboarding/arquitetura-fluxo-onboarding.md", title: "Fluxo de Onboarding",       info: "Estruture um fluxo de onboarding completo. (CARE × Chain-of-Thought)" },
       { file: "receitas/design-system/documentacao-componente-ui.md", title: "Documentação de Componente", info: "Documente um componente do Design System. (RTCF × Few-Shot)" },
       { file: "receitas/ux-writing/microcopy-erro-critico.md",       title: "Microcopy de Erro",         info: "Refine mensagens de erro em 3 turnos. (C-C-E-R-A × Iterativo)" },
       { file: "receitas/ux-writing/mensagens-erro-humanas.md",       title: "Mensagens de Erro Humanas", info: "Escreva mensagens de erro humanas e acessíveis. (RTCF × Few-Shot)" },
       { file: "receitas/ux-writing/reescrita-direta-microcopy.md",   title: "Reescrita Direta (Plug-and-Play)", info: "Otimize a copy de uma tela pronta, sem mexer no layout. (RTCF × Zero-Shot)" },
     ]},
-    { label: "Prompt para imagem e fotos", items: [
+    { label: "Imagens", icon: "image", items: [
       { file: "imagens-e-fotos/sobre.md", title: "Visão geral", info: "Introdução à categoria: prompts para gerar e editar imagens e fotos (Midjourney, DALL·E, Stable Diffusion, Gemini, Firefly)." },
       { file: "imagens-e-fotos/anatomia-do-prompt.md", title: "Anatomia do prompt", info: "A fórmula: Sujeito + Composição + Iluminação + Textura + Equipamento ótico, com exemplo montado." },
       { file: "imagens-e-fotos/dicionario-iluminacao.md", title: "Dicionário: Iluminação", info: "Fragmentos de luz: chiaroscuro, Rembrandt, high-key." },
@@ -296,6 +300,12 @@
       { file: "imagens-e-fotos/dicionario-texturas.md", title: "Dicionário: Texturas", info: "Impasto, 35mm film grain, matte ceramic, brushed metal." },
       { file: "imagens-e-fotos/dicionario-estilos.md", title: "Dicionário: Estilos", info: "Flat design, claymorphism, glassmorphism, editorial noir." },
       { file: "imagens-e-fotos/catalogo-por-objetivo.md", title: "Catálogo por objetivo", info: "Escolha o estilo visual pelo objetivo de negócio (matriz 2×2)." },
+    ]},
+    { label: "Personas", icon: "users", items: [
+      { file: "personas/sobre.md", title: "Visão geral", info: "Coleção de prompts para gerar e validar personas de UX com dados concretos (cargo, ferramentas, contexto)." },
+      { file: "personas/geracao-de-persona.md", title: "Geração de persona", info: "Prompt principal: dados concretos + anti-alucinação + Flow Mode, saída em JSON de restrições de layout." },
+      { file: "personas/auditoria-de-persona.md", title: "Auditoria de persona", info: "Bandeiras vermelhas e teste de estresse para validar personas geradas por IA." },
+      { file: "personas/jornada-do-usuario.md", title: "Mapa de Jornada", info: "Gere um mapa de jornada do usuário detalhado (tabela), com regras de controle anti-clichê. Opção SaaS ou era da IA." },
     ]},
   ];
 
@@ -307,6 +317,11 @@
     pinOff: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>',
     pinOn: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>',
     chevron: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>',
+    home: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7"/><path d="M4 6.4V13h8V6.4"/></svg>',
+    grid: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.6" height="4.6" rx="1"/><rect x="8.9" y="2.5" width="4.6" height="4.6" rx="1"/><rect x="2.5" y="8.9" width="4.6" height="4.6" rx="1"/><rect x="8.9" y="8.9" width="4.6" height="4.6" rx="1"/></svg>',
+    beaker: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.2h4M6.6 2.2v4L3.6 11.9a1 1 0 0 0 .9 1.5h7a1 1 0 0 0 .9-1.5L9.4 6.2v-4"/><path d="M5 9.6h6"/></svg>',
+    image: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.2" y="3" width="11.6" height="10" rx="1.6"/><circle cx="5.7" cy="6.3" r="1.1"/><path d="m2.8 11.2 3.1-2.6 2.4 2 2.1-1.7 3.4 2.8"/></svg>',
+    users: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.2" r="2.4"/><path d="M3.6 13c0-2.3 2-3.7 4.4-3.7s4.4 1.4 4.4 3.7"/></svg>',
   };
 
   const nav = document.getElementById("nav");
@@ -339,9 +354,12 @@
     row.appendChild(pin); row.appendChild(a);
     return row;
   }
-  // Grupos recolhíveis (persistidos)
-  let collapsedGroups = new Set();
-  try{ const s = JSON.parse(localStorage.getItem("collapsedGroups") || "[]"); if(Array.isArray(s)) collapsedGroups = new Set(s); }catch(e){}
+  // Grupos recolhíveis (persistidos). Padrão: todos fechados na 1ª visita.
+  let collapsedGroups;
+  try{
+    const raw = localStorage.getItem("collapsedGroups");
+    collapsedGroups = raw ? new Set(JSON.parse(raw)) : new Set(NAV.map(g => g.label));
+  }catch(e){ collapsedGroups = new Set(NAV.map(g => g.label)); }
   const searching = () => (searchEl.value || "").trim().length > 0;
   function toggleGroup(label, g, btn){
     const nowCollapsed = g.classList.toggle("collapsed");
@@ -349,13 +367,15 @@
     nowCollapsed ? collapsedGroups.add(label) : collapsedGroups.delete(label);
     try{ localStorage.setItem("collapsedGroups", JSON.stringify([...collapsedGroups])); }catch(e){}
   }
-  function groupEl(label, items){
+  function groupEl(label, items, iconKey){
     const g = document.createElement("div"); g.className = "nav-group";
-    const collapsed = collapsedGroups.has(label) && !searching();
+    const hasActive = items.some(it => it.file === currentFile);
+    const collapsed = collapsedGroups.has(label) && !searching() && !hasActive;
     if(collapsed) g.classList.add("collapsed");
+    const gico = (iconKey && ICON[iconKey]) ? ICON[iconKey] : "";
     const btn = document.createElement("button");
     btn.type = "button"; btn.className = "label";
-    btn.innerHTML = `<span>${label}</span>${ICON.chevron}`;
+    btn.innerHTML = `<span class="g-ico">${gico}</span><span class="g-label">${label}</span><span class="chev">${ICON.chevron}</span>`;
     btn.setAttribute("aria-expanded", collapsed ? "false" : "true");
     btn.onclick = () => toggleGroup(label, g, btn);
     g.appendChild(btn);
@@ -369,10 +389,10 @@
     const match = it => !q || (it.title + " " + (it.info || "")).toLowerCase().includes(q);
     nav.innerHTML = "";
     const pinned = ALL.filter(it => pins.has(it.file) && match(it));
-    if(pinned.length) nav.appendChild(groupEl("Fixados", pinned));
+    if(pinned.length) nav.appendChild(groupEl("Fixados", pinned, "pinOn"));
     NAV.forEach(gr => {
       const items = gr.items.filter(it => !pins.has(it.file) && match(it));
-      if(items.length) nav.appendChild(groupEl(gr.label, items));
+      if(items.length) nav.appendChild(groupEl(gr.label, items, gr.icon));
     });
     if(!nav.children.length){
       const e = document.createElement("p"); e.className = "nav-empty";
@@ -464,8 +484,7 @@
         <div class="code-wrap"><pre><code>py -m http.server</code></pre></div>`;
     }
     currentFile = file;
-    document.querySelectorAll("aside a").forEach(a =>
-      a.classList.toggle("active", a.dataset.file === file));
+    renderNav();
     window.scrollTo(0,0);
   }
 
